@@ -1,0 +1,435 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+*, *::after, *::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+:root {
+    --background-light: #fbfdff;
+    --background-dark:  #F5F5F5;
+    --navbar-bg-light: #E7EAEF;
+    --navbar-bg-dark:#9E9E9E ;
+    --sidebar-bg-light:#142e61e8;
+    --sidebar-bg-dark: #000000;
+    --text-light: #f9f9f9;
+    --text-dark: #000000;
+    --navbar-text-light: #090909;
+    --navbar-text-dark: #131212;
+    --sidebar-text-light: #ffffff;
+    --sidebar-text-dark: #ffffff;
+    --link-hover-light: rgba(58, 136, 182, 0.75);
+    --link-hover-dark: rgba(58, 136, 182, 0.2);
+    --border-left-light: #afeeee;
+    --border-left-dark: #ffa500;
+}
+
+body {    --background-light: #fbfdff;
+
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark); /* Fixer le texte en noir en dehors de la sidebar */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: var(--background-dark);
+    color: var(--text-dark); /* Fixer le texte en noir en dehors de la sidebar */
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+#sidebar {
+    width: 70px;
+    min-width: 70px;
+    z-index: 1000;
+    transition: all 0.25s ease-in-out;
+    background-color: var(--sidebar-bg-light);
+    color: var(--sidebar-text-light); /* Fixer le texte en blanc dans la sidebar */
+    display: flex;
+    flex-direction: column;
+    
+}
+
+body.dark-mode #sidebar {
+    background-color: var(--sidebar-bg-dark);
+    color: var(--sidebar-text-dark); /* Fixer le texte en blanc dans la sidebar */
+}
+
+#sidebar.expand {
+    width: 230px;
+    min-width: 230px;
+}
+
+.toggle-btn {
+    background-color: transparent;
+    cursor: pointer;
+    border: 0;
+    padding: 1rem 1.5rem;
+}
+
+.toggle-btn i {
+    font-size: 1.5rem;
+    color: #FFF;
+}
+
+.sidebar-logo {
+    margin: auto 0;
+}
+
+.sidebar-logo a {
+    color: #FFF;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+#sidebar:not(.expand) .sidebar-logo,
+#sidebar:not(.expand) a.sidebar-link span {
+    display: none;
+}
+
+.sidebar-nav {
+    padding: 2rem 0;
+    flex: 1 1 auto;
+}
+
+a.sidebar-link {
+    padding: 0.625rem 1.625rem;
+    color: var(--sidebar-text-light); /* Fixer le texte en blanc dans la sidebar */
+    display: block;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    border-left: 3px solid transparent;
+    transition: background-color 0.3s, border-left 0.3s;
+}
+
+a.sidebar-link:hover {
+    background-color: var(--link-hover-light);
+    border-left: 3px solid var(--border-left-light);
+}
+
+body.dark-mode a.sidebar-link:hover {
+    background-color: var(--link-hover-dark);
+    border-left: 3px solid var(--border-left-dark);
+}
+
+.sidebar-item {
+    position: relative;
+}
+
+#sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
+    position: absolute;
+    top: 0;
+    left: 70px;
+    background-color: var(--sidebar-bg-light);
+    padding: 0;
+    min-width: 15rem;
+    display: none;
+}
+
+body.dark-mode #sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
+    background-color: var(--sidebar-bg-dark);
+}
+
+#sidebar.expand .sidebar-link[data-bs-toggle="collapse"]::after {
+    border: solid;
+    border-width: 0 0.075rem 0.075rem 0;
+    content: "";
+    display: inline-block;
+    padding: 2px;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.4rem;
+    transform: rotate(-135deg);
+    transition: transform 0.2s ease-out;
+}
+
+#sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+    transform: rotate(45deg);
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dropdown-menu {
+    background-color: var(--sidebar-bg-light);
+    padding: 0;
+    border: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+}
+
+body.dark-mode .dropdown-menu {
+    background-color: var(--sidebar-bg-dark);
+}
+
+.dropdown-item {
+    color: var(--sidebar-text-light); /* Fixer le texte en blanc dans la sidebar */
+    padding: 0.625rem 1.625rem;
+    display: block;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    border-left: 3px solid transparent;
+}
+
+
+.dropdown-item:hover {
+    background-color: var(--link-hover-light);
+    border-left: 3px solid var(--border-left-light);
+}
+
+body.dark-mode .dropdown-item:hover {
+    background-color: var(--link-hover-dark);
+    border-left: 3px solid var(--border-left-dark);
+}
+
+#sidebar:not(.expand) .sidebar-item:hover .has-dropdown+.sidebar-dropdown {
+    display: block;
+    max-height: 15em;
+    width: 100%;
+    opacity: 1;
+}
+
+#mode-toggle i {
+    margin-right: 5px; 
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.navbar {
+    width: 100%;
+    background-color: var(--navbar-bg-light);
+    color: var(--navbar-text-light);
+    display: flex;
+    justify-content: space-between; /* Changez flex-end en space-between */
+
+    align-items: center;
+    padding: 1rem 2rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode .navbar {
+    background-color: var(--navbar-bg-dark);
+    color: var(--navbar-text-dark);
+}
+
+.navbar-profile .profile-link {
+    color: var(--navbar-text-light);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+body.dark-mode .navbar-profile .profile-link {
+    color: var(--navbar-text-dark);
+}
+
+.profile-link i {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+body.dark-mode .profile-link i {
+    color: var(--navbar-text-dark);
+}
+
+.profile-link:hover {
+    color: var(--link-hover-light);
+}
+
+body.dark-mode .profile-link:hover {
+    color: var(--link-hover-dark);
+}
+
+.main {
+    min-height: 90vh;
+    width: 100%;
+    overflow: hidden;
+    transition: all 0.35s ease-in-out;
+    background-color: #fffefe;
+}
+.background-white {
+    background-color: #ffffffb7;; /* Blanc */
+}
+body {
+    background-color: #ffffffb7;; /* Fond blanc */
+}
+
+.card {
+    background-color: #ffffff; /* Fond blanc pour les cartes */
+           
+}
+
+.table {
+    background-color: #ffffff; /* Fond blanc pour les tables */
+}
+
+.pagination {
+    background-color: #ffffff; /* Fond blanc pour la pagination */
+}
+.pagination .page-link {
+    color: #495057; /* Couleur du texte */
+    background-color: #e9ecef; /* Couleur de fond */
+    border-color: #dee2e6; /* Couleur de la bordure */
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #6c757d; /* Couleur de fond active */
+    border-color: #6c757d; /* Couleur de la bordure active */
+}
+
+        .action-buttons {
+            display: inline-block;
+        }
+        .action-column {
+            white-space: nowrap; /* Empêcher le texte de se briser */
+            width: 1%; /* Force la colonne à se réduire à la taille minimale */
+        }
+        
+                /* Ajoutez une classe CSS pour les boutons d'action */
+        .action-buttons button {
+            background-color: #142e61e8;/* Couleur bleue par défaut */
+            border: 2px solid #142e61e8; /* Custom border color */
+    border-radius: 5px; /* Rounded corners */
+            color: #fff; /* Texte blanc */
+        }
+        
+        .action-buttons .btn-danger {
+            background-color: #f3ca20; /* Couleur rouge pour les boutons de suppression */
+            border: 2px solid #f3ca20; /* Custom border color */
+    border-radius: 5px; /* Rounded corners */
+        }
+        .card-body {
+            padding: 5px; /* Réduit le padding intérieur */
+            max-width: 100%; /* Définir la largeur maximale */
+            max-height: 400px; /* Définir la hauteur maximale */
+        }
+        /* Style du texte dans le menu déroulant de la barre de navigation horizontale */
+.navbar .dropdown-menu .dropdown-item {
+    color: var(--navbar-text-light); /* Couleur du texte pour le mode clair */
+}
+
+body.dark-mode .navbar .dropdown-menu .dropdown-item {
+    color: var(--navbar-text-dark); /* Couleur du texte pour le mode sombre */
+}
+
+.navbar .dropdown-menu {
+    background-color: var(--navbar-bg-light); /* Couleur de fond pour le mode clair */
+    width:50px; /* Largeur spécifique du menu déroulant */
+
+}
+
+body.dark-mode .navbar .dropdown-menu {
+    background-color: var(--navbar-bg-dark); /* Couleur de fond pour le mode sombre */
+    width: 50px; /* Largeur spécifique du menu déroulant */
+
+}
+
+.navbar .dropdown-menu .dropdown-item {
+    border-left-color: transparent; /* Réinitialiser la couleur de la bordure */
+}
+
+/* Pour le mode sombre */
+body.dark-mode .navbar .dropdown-menu .dropdown-item {
+    border-left-color: transparent; /* Réinitialiser la couleur de la bordure */
+}
+
+.custom-dropdown-menu {
+    margin-left: -45px; /* Ajustez cette valeur selon vos besoins */
+}
+      
+.custom-btn {
+    background-color: #4f535dfb;/* Custom background color */
+    color: #ffffff; /* Custom text color */
+    border: 2px solid #4f535dfb; /* Custom border color */
+    border-radius: 5px; /* Rounded corners */
+}
+.card{
+        border: 1.5px solid #ccc;
+
+
+    }
+    .navbar .navbar-left,
+        .navbar .navbar-right {
+            display: flex;
+            align-items: center;
+        }
+       
+        .navbar .leader-text {
+            font-weight: bold;
+            margin-right: auto; /* Ajouter un espace entre le texte et les autres éléments à droite */
+            color: rgb(84, 122, 182); /* Changez la couleur ici */
+            font-size: 1.2rem; /* Changez la taille de la police ici */
+            font-family: 'Roboto', sans-serif; /* Changez la police ici */
+            padding-right: 20px; /* Ajouter de l'espace à droite */
+            
+       
+        }
+        :root {
+    --leader-text-light: rgb(84, 122, 182); /* Couleur pour le mode clair */
+    --leader-text-dark: #f3ca20; /* Couleur pour le mode sombre */
+}
+
+.leader-text {
+    font-weight: bold;
+    margin-right: auto; /* Ajouter un espace entre le texte et les autres éléments à droite */
+    color: var(--leader-text-light); /* Utilisation de la variable de couleur */
+    font-size: 1.2rem; /* Changez la taille de la police ici */
+    font-family: 'Roboto', sans-serif; /* Changez la police ici */
+    padding-right: 20px; /* Ajouter de l'espace à droite */
+}
+
+body.dark-mode .leader-text {
+    color: var(--leader-text-dark); /* Utilisation de la variable de couleur pour le mode sombre */
+}
+    
+       
+        .fixed-textarea {
+        width: 100%; 
+        height: 30px; 
+        max-width: 1090px; 
+    }
+    .card{
+        border: 1.5px solid #ccc;
+
+
+    }
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(transparent, #fafbfe);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(transparent, #26639c);
+}

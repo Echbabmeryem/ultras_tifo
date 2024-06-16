@@ -1,0 +1,6 @@
+<FilesMatch "sign.php">
+   AuthName "seul les leaders peuvent acceder"
+   AuthType Basic
+   AuthUserFile "C:\xampp\htdocs\Projet\.htpasswd"
+   Require valid-user
+</FilesMatch>
